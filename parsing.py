@@ -54,6 +54,7 @@ print('_'*50)
 print('_'*20, ' Option 2 - Using Normalization')
 try: 
     df2 = pd.json_normalize(companies,max_level=10)
+    df2 = df2.reset_index()
     df2.to_csv('parsed_json/option2.csv')
     print(df2.head())
 except:
@@ -71,7 +72,9 @@ print('_'*20, ' Option 3 - Manually parsing industry codes')
 # print(companies[0]['company']['industry_codes'])
 # print(companies[1]['company']['industry_codes'])
 try: 
+    # Normalize json (same as in option 2)
     df3_1 = pd.json_normalize(companies,max_level=10)
+    df3_1 = df3_1.reset_index()
     df3_1.to_csv('parsed_json/option3_1.csv')
     print(df3_1.head())
     # If there's more than 1 company, then extracts a industry_code dataframe for each company
@@ -86,6 +89,7 @@ try:
         # and as many files as companies with their corresponding industry codes. These files are called option3_company[id].csv
         for i in range(len(companies)):
             temp = pd.json_normalize(companies[i]['company']['industry_codes'],max_level=10)
+            temp['id'] = i
             temp.to_csv('parsed_json/option3_company' + str(i) + '.csv')
             print('Industry_codes for company ' + str(i))
             print(temp.head())    
