@@ -99,3 +99,53 @@ def get_all_titanic_rows(db: Session = Depends(get_db)):
 def get_titanic_row(id: int, db: Session = Depends(get_db)):
     row = db.query(Titanic).filter(Titanic.passengerid == id).first()
     return row
+
+# Define an endpoint to get passenger based in their features
+@app.get("/titanic/")
+async def filter_passengers(
+    passengerid: int | None = None,
+    survived: int | None = None,
+    pclass: int | None = None,
+    name: str | None = None,
+    sex: str | None = None,
+    age: float | None = None,
+    sibsp: int | None = None,
+    parch: int | None = None,
+    ticket: str | None = None,
+    fare: float | None = None,
+    cabin: str | None = None,
+    embarked: str | None = None,
+    db: Session = Depends(get_db)
+):
+    # Get all rows first (not efficient if dataset is large)
+    passengers = db.query(Titanic)
+
+    # Filter rows based on the query parameter
+    # When text is large, I used contains function
+    if passengerid is not None:
+        passengers = passengers.filter(Titanic.passengerid == passengerid)
+    if survived is not None:
+        passengers = passengers.filter(Titanic.survived == survived)
+    if pclass is not None:
+        passengers = passengers.filter(Titanic.pclass == pclass)
+    if name is not None:
+        passengers = passengers.filter(Titanic.name.contains(name))
+    if sex is not None:
+        passengers = passengers.filter(Titanic.sex == sex)
+    if age is not None:
+        passengers = passengers.filter(Titanic.age == age)
+    if sibsp is not None:
+        passengers = passengers.filter(Titanic.sibsp == sibsp)
+    if parch is not None:
+        passengers = passengers.filter(Titanic.parch == parch)
+    if ticket is not None:
+        passengers = passengers.filter(Titanic.ticket.contains(ticket))
+    if fare is not None:
+        passengers = passengers.filter(Titanic.fare == fare)
+    if cabin is not None:
+        passengers = passengers.filter(Titanic.cabin.contains(cabin))
+    if embarked is not None:
+        passengers = passengers.filter(Titanic.embarked == embarked)
+
+    passengers = passengers.all()
+    return passengers
