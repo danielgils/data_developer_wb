@@ -39,7 +39,7 @@ print(companies)
 # Result: This option does not work because of the dept of the JSON
 # Comment: This dataframe is exported in a csv file
 print('_'*50)
-print('_'*20, ' Option 1:')
+print('_'*20, ' Option 1 - Using Pandas')
 try: 
     df1 = pd.DataFrame(companies)
     df1.to_csv('parsed_json/option1.csv')
@@ -51,7 +51,7 @@ except:
 # Result: This option offers enough flexibility to access most of the information.
 # Comment: variable 'Industry code' has more nested variables but they are inside a list
 print('_'*50)
-print('_'*20, ' Option 2:')
+print('_'*20, ' Option 2 - Using Normalization')
 try: 
     df2 = pd.json_normalize(companies,max_level=10)
     df2.to_csv('parsed_json/option2.csv')
@@ -65,7 +65,7 @@ except:
 # needed merge both tables. In this option the first table will have all the variables
 # of the company, and the second will have its corresponding industry tables
 print('_'*50)
-print('_'*20, ' Option 3:')
+print('_'*20, ' Option 3 - Manually parsing industry codes')
 # print(companies[0])
 # print('+'*50)
 # print(companies[0]['company']['industry_codes'])
@@ -74,12 +74,16 @@ try:
     df3_1 = pd.json_normalize(companies,max_level=10)
     df3_1.to_csv('parsed_json/option3_1.csv')
     print(df3_1.head())
-    # If there's more than 1 company then extracts a industry_code dataframe for each company
+    # If there's more than 1 company, then extracts a industry_code dataframe for each company
     if len(companies) == 1:
+       # When there's only 1 company, two files are created: option3_1.csv with all the company's info
+       # and option3_2.csv with its corresponding industry codes.
        df3_2 = pd.json_normalize(companies[0]['company']['industry_codes'],max_level=10)
        df3_2.to_csv('parsed_json/option3_2.csv')
        print(df3_2.head())
     else:
+        # When there are more than 1 company, multiples files are created: option3_1.csv with all the company's info
+        # and as many files as companies with their corresponding industry codes. These files are called option3_company[id].csv
         for i in range(len(companies)):
             temp = pd.json_normalize(companies[i]['company']['industry_codes'],max_level=10)
             temp.to_csv('parsed_json/option3_company' + str(i) + '.csv')
@@ -87,3 +91,7 @@ try:
             print(temp.head())    
 except:
     print("Unable to export file because of an error normalizing the JSON file")
+
+# Last message in the terminal
+print('='*50)
+print('='*20, 'Different versions of the JSON file can be seen inside the "parsed_json" folder.')

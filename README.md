@@ -10,10 +10,12 @@ To run the files of the *Section I* follow these steps:
 
 Once this process is done, you can do the following:
 - Section I
-    - API: This is an API developed with FastAPI to list the entries in the Titanic file. To see the API working locally you can run in the terminal `uvicorn api:app --reload --host 0.0.0.0`. This API has two endpoints:
+    - API: This is an API developed with FastAPI to list the entries in the Titanic file. The code is in the file `api.py`.  To see the API working locally you can run in the terminal `uvicorn api:app --reload --host 0.0.0.0`. This API has two endpoints:
         - `http://0.0.0.0:8000/titanic` shows all the entries in the titanic file
         - `http://0.0.0.0:8000/titanic/{id}` shows the information of the passenger based on his/her `PassengerID`.
+        - `http://0.0.0.0:8000/titanic/?` shows the information of the passenger based on his/her features. This endpoint has query parameters, i.e., to filter based on multiple features they need to be in the url. For example, `http://0.0.0.0:8000/titanic/?sex=female&pclass=3` shows only females passengers in third class.
         - The documentation of the API can be seen at `http://0.0.0.0:8000/docs`
-    - Parsing: This file contain three different attempts to parse correctly the information contained in the JSON file. The resulting dataframes are saved inside the `parsed_json` folder. The second option is good enough for most cases but for `industry_codes` variable which contain a list of codes. In the case that these codes are needed, then the third option may work. It is important to note that the JSON file cannot be imported directly because it has single quotes instead of doubles, so in the code these quotes are changed.
+    - Parsing: The code is in the file `parsing.py`and to run it type in the terminal `python parsing.py`. This file contains three different attempts to parse correctly the information contained in the JSON file. The resulting dataframes are saved inside the `parsed_json` folder. The first attempt consists in directly transform the JSON file into a dataframe using Pandas (does not work great). The second attempt consists in using `json_normalize` function, which results are good enough for most cases but for `industry_codes` variable which contain a list of codes. In the case that these codes are needed, then the third option may work. It is important to note that the JSON file cannot be imported directly because it has single quotes instead of doubles, so in the code these quotes are changed.
+- Section II: The answers are in the file `section2.txt`.
 
 This test was developed in Ubuntu Server 22.04.1 LTS, using Python 3.10.6 with the help of ChatGPT.

@@ -5,8 +5,8 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, Column, Integer, String, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from typing import List, Optional
-from pydantic import BaseModel
+# from typing import List, Optional
+# from pydantic import BaseModel
 
 # Create a Path object with the path to the database
 path = Path('./titanic.db')
@@ -38,15 +38,15 @@ class Titanic(Base):
     cabin = Column(String, default=None)
     embarked = Column(String)
 
-# Create database if it does not exist already
+# Create table if it does not exist already
 if not path.is_file():
     print('_'*50)
     print('Creating database...')
 
-    # Create the "titanic" table (if it doesn't already exist)
+    # Create the "titanic" table
     Base.metadata.create_all(bind=engine)
 
-    # Open the CSV file and insert each row into the database
+    # Open the CSV file and save each row into a list
     with open("titanic.csv") as f:
         reader = csv.DictReader(f)
         rows = [row for row in reader]
@@ -54,7 +54,7 @@ if not path.is_file():
     # Create a database session
     db = SessionLocal()
 
-    # Loop through the rows and insert them into the database
+    # Loop through the rows list and insert them into the database
     for row in rows:
         passenger = Titanic(
             passengerid=row["PassengerId"],
