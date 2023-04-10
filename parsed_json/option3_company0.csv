@@ -1,0 +1,4 @@
+,industry_code.code,industry_code.description,industry_code.code_scheme_id,industry_code.code_scheme_name,industry_code.uid
+0,86.90,Other human health activities,uk_sic_2007,UK SIC Classification 2007,uk_sic_2007-8690
+1,86.90,Other human health activities,eu_nace_2,European Community NACE Rev 2,eu_nace_2-8690
+2,8690,Other human health activities,isic_4,UN ISIC Rev 4,isic_4-8690
