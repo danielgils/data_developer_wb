@@ -13,12 +13,20 @@ To run the files of the *Section I* follow these steps:
 ## Answers to the test
 Once the setup is done, you can do the following:
 - Section I
-    - API: This is an API developed with FastAPI to list the entries in the Titanic file. The code is in the file `api.py`.  To see the API working locally you can run in the Terminal/Powershell `uvicorn api:app --reload --host 0.0.0.0`. This API has three endpoints:
-        - `http://0.0.0.0:8000/titanic` shows all the entries in the titanic file. This also works in `http://localhost:8000/titanic`.
-        - `http://0.0.0.0:8000/titanic/{id}` shows the information of the passenger based on his/her `PassengerID`. This also works in `http://localhost:8000/titanic/{id}`.
-        - `http://0.0.0.0:8000/titanic/?` shows the information of the passenger based on his/her features. This endpoint has query parameters, i.e., to filter based on multiple features they need to be in the url. For example, `http://0.0.0.0:8000/titanic/?sex=female&pclass=3` shows only females passengers in third class. This also works in `http://localhost:8000/titanic/?sex=female&pclass=3`.
+    - API: This is an API developed with FastAPI to list the entries in the Titanic file. The code is in the file `api.py`. 
+        - To see the API working locally you can run in the Terminal/Powershell `uvicorn api:app --reload --host 0.0.0.0`. 
+        - This API has three endpoints:
+            - `http://0.0.0.0:8000/titanic` shows all the entries in the titanic file. This also works in `http://localhost:8000/titanic`.
+            - `http://0.0.0.0:8000/titanic/{id}` shows the information of the passenger based on his/her `PassengerID`. This also works in `http://localhost:8000/titanic/{id}`.
+            - `http://0.0.0.0:8000/titanic/?` shows the information of the passenger based on his/her features. This endpoint has query parameters to filter based on multiple features, i.e., the filter need to be in the url. For example, `http://0.0.0.0:8000/titanic/?sex=female&pclass=3` shows only females passengers in third class. This also works in `http://localhost:8000/titanic/?sex=female&pclass=3`.
         - The documentation of the API can be seen at `http://0.0.0.0:8000/docs`. This also works in `http://localhost:8000/docs`.
-    - Parsing: The code is in the file `parsing.py`and to run it type in the Terminal/Powershell `python parsing.py`. This file contains three different attempts to parse correctly the information contained in the JSON file. The resulting dataframes are saved inside the `parsed_json` folder. The first attempt consists in directly transform the JSON file into a dataframe using Pandas (does not work great). The second attempt consists in using `json_normalize` function, which results are good enough for most cases but for `industry_codes` variable which contain a list of codes. In the case that these codes are needed, then the third option may work. It is important to note that the JSON file cannot be imported directly because it has single quotes instead of doubles, so in the code these quotes are changed.
+    - Parsing: The code is in the file `parsing.py`and to run it type in the Terminal/Powershell `python parsing.py`. 
+        - The dataframes resulting of this script are saved inside the `parsed_json` folder. 
+        - This file contains three different attempts to parse correctly the information contained in the JSON file: 
+            - The first attempt consists in directly transform the JSON file into a dataframe using Pandas (does not work great). 
+            - The second attempt consists in using `json_normalize` function, which results are good enough for most cases but for `industry_codes` variable which contain a list of codes. 
+            - In the case that these codes are needed, then the third option may work. 
+        - It is important to note that the JSON file cannot be imported directly because it has single quotes instead of doubles, so in the code these quotes are changed.
 - Section II: The answers are in the file `section2.txt`.
 
 ## Notes

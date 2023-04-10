@@ -102,7 +102,7 @@ def get_titanic_row(id: int, db: Session = Depends(get_db)):
 
 # Define an endpoint to get passenger based in their features
 @app.get("/titanic/")
-async def filter_passengers(
+def filter_passengers(
     passengerid: int | None = None,
     survived: int | None = None,
     pclass: int | None = None,
