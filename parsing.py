@@ -61,8 +61,8 @@ except:
 
 # Option 3: Parsing manually
 # Comment: Having checked the information in the option 2, the best way to keep a dataframe 
-# where there's a single row per company, is to keep industry codes in another table and when
-# needed apply a join to merge both tables. In this option the first table will have all the variables
+# where there's a single row per company is to keep industry codes in another table, and when
+# needed merge both tables. In this option the first table will have all the variables
 # of the company, and the second will have its corresponding industry tables
 print('_'*50)
 print('_'*20, ' Option 3:')
